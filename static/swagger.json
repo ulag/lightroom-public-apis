@@ -497,7 +497,7 @@
 						"$ref": "#/components/responses/Unauthorized"
 					},
 					"403": {
-						"description": "--The request failed due to insufficient permissions 1.",
+						"description": "The request failed due to insufficient permissions.",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -3896,35 +3896,35 @@
 		},
 		"examples": {
 			"ForbiddenKeyExample": {
-				"summary": "Invalid Api Key",
+				"summary": "403 (Invalid Key)",
 				"value": {
 					"code": 403003,
 					"description": "API Key is invalid"
 				}
 			},
 			"ForbiddenAccountExample": {
-				"summary": "Invalid Account State.",
+				"summary": "403 (Forbidden Account)",
 				"value": {
 					"code": 4301,
 					"description": "Access forbidden due to account state of resource owner"
 				}
 			},
 			"ForbiddenExistsExample": {
-				"summary": "Resource Exists",
+				"summary": "403 (Exists)",
 				"value": {
 					"code": 1002,
 					"description": "Resource already exists"
 				}
 			},
 			"ForbiddenQuotaExample": {
-				"summary": "Insufficient Storage",
+				"summary": "403 (Storage)",
 				"value": {
 					"code": 1043,
 					"description": "Too many assets"
 				}
 			},
 			"ForbiddenExample": {
-				"summary": "Access Forbidden.",
+				"summary": "403 (Forbidden)",
 				"value": {
 					"code": 4300,
 					"description": "Access is forbidden"
