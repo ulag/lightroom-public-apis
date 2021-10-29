@@ -513,17 +513,17 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/BasicErrorBody"
+									"$ref": "#/components/schemas/GetCatalog403ErrorBody"
 								},
 								"examples": {
 									"InvalidApiKey": {
 										"$ref": "#/components/examples/ForbiddenKeyExample"
 									},
-									"InvalidAccountState": {
-										"$ref": "#/components/examples/ForbiddenAccountExample"
-									},
 									"Forbidden": {
 										"$ref": "#/components/examples/ForbiddenExample"
+									},
+									"InvalidAccountState": {
+										"$ref": "#/components/examples/ForbiddenAccountExample"
 									}
 								}
 							}
@@ -680,10 +680,10 @@
 															"$ref": "#/components/examples/ForbiddenKeyExample"
 														},
 														"ResourceExists": {
-															"$ref": "#/components/examples/ForbiddenExistsExample"
+															"$ref": "#/components/examples/AssetExistsErrorBodyExample"
 														},
 														"QuotaExceeded": {
-															"$ref": "#/components/examples/ForbiddenQuotaExample"
+															"$ref": "#/components/examples/AssetQuotaExceededErrorBodyExample"
 														}
 													}
 												}
@@ -3929,6 +3929,23 @@
 					"description": "API Key is invalid"
 				}
 			},
+			"BasicErrorBodyExample": {
+				"summary": "BasicErrorBody",
+				"value": {
+					"code": 403003,
+					"description": "API Key is invalid"
+				}
+			},
+			"AssetExistsErrorBodyExample": {
+				"summary": "ResourceExistsErrorBody",
+				"value": {
+					"errors": [
+						{"asset": [ "already exists"]}
+					],
+					"code": 1002,
+					"description": "Resource already exists"
+				}
+			},
 			"ForbiddenAccountExample": {
 				"summary": "403 (Forbidden Account)",
 				"value": {
@@ -3936,18 +3953,8 @@
 					"description": "Access forbidden due to account state of resource owner"
 				}
 			},
-			"ForbiddenExistsExample": {
-				"summary": "403 (Exists)",
-				"value": {
-					"errors": [
-						{"<resource_type>": [ "already exists"]}
-					],
-					"code": 1002,
-					"description": "Resource already exists"
-				}
-			},
-			"ForbiddenQuotaExample": {
-				"summary": "403 (Storage)",
+			"AssetQuotaExceededErrorBodyExample": {
+				"summary": "QuotaExceededErrorBody",
 				"value": {
 					"errors": [
 						{"<asset_id>": [ "quota exceeded"]}
@@ -3963,9 +3970,64 @@
 					"code": 4300,
 					"description": "Access is forbidden"
 				}
-			}
+			},
+			
 		},
 		"schemas": {
+			"GetCatalog403ErrorBody": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "integer",
+						"enum": [ 403003, 4300, 4301]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "API Key is invalid", "Access is forbidden", "Access forbidden due to account state of resource owner"]
+					}
+				}
+			},
+			
+			"ForbiddenKeyErrorBody": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "integer",
+						"enum": [ 403003]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "API Key is invalid"]
+					}
+				}
+			},
+			"ForbiddenAccountErrorBody": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "integer",
+						"enum": [ 4301]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Access forbidden due to account state of resource owner"]
+					}
+				}
+			},
+			"ForbiddenErrorBody": {
+				"type": "object",
+				"properties": {
+					"code": {
+						"type": "integer",
+						"enum": [ 4300]
+					},
+					"description": {
+						"type": "string",
+						"enum": [ "Access is forbidden"]
+					}
+				}
+			},
+			
 			"BasicErrorBody": {
 				"type": "object",
 				"properties": {
@@ -3986,16 +4048,19 @@
 										"<resource_type>": {
 											"type": "array",
 											"items": {
-												"type": "string"
+												"type": "string",
+												"enum": [ "already exists"]
 											}
 										}
 									}
 								},
 								"code": {
-									"type": "integer"
+									"type": "integer",
+									"enum": [ 1002 ]
 								},
 								"description": {
-									"type": "string"
+									"type": "string",
+									"enum": [ "Resource already exists" ]
 								}
 							}
 			},
@@ -4008,16 +4073,19 @@
 										"<asset_id>": {
 											"type": "array",
 											"items": {
-												"type": "string"
+												"type": "string",
+												"enum": [ "quota exceeded"]
 											}
 										}
 									}
 								},
 								"code": {
-									"type": "integer"
+									"type": "integer",
+									"enum": [ 1043 ]
 								},
 								"description": {
-									"type": "string"
+									"type": "string",
+									"enum": [ "Too many assets" ]
 								}
 							}
 			},
