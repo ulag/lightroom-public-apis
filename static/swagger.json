@@ -501,7 +501,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/403ErrorResponse"
+									"$ref": "#/components/schemas/403ErrorBody"
 								},
 								"examples": {
 									"InvalidApiKey": {
@@ -3932,7 +3932,7 @@
 			}
 		},
 		"schemas": {
-			"403ErrorResponse": {
+			"403ErrorBody": {
 				"type": "object",
 				"properties": {
 					"code": {
