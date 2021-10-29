@@ -3939,9 +3939,7 @@
 			"AssetExistsErrorBodyExample": {
 				"summary": "ResourceExistsErrorBody",
 				"value": {
-					"errors": [
-						{"asset": [ "already exists"]}
-					],
+					"errors": {"asset": [ "already exists"]},
 					"code": 1002,
 					"description": "Resource already exists"
 				}
@@ -3956,9 +3954,7 @@
 			"AssetQuotaExceededErrorBodyExample": {
 				"summary": "QuotaExceededErrorBody",
 				"value": {
-					"errors": [
-						{"<asset_id>": [ "quota exceeded"]}
-					],
+					"errors": {"<asset_id>": [ "quota exceeded"]},
 					"code": 1043,
 					"description": "Too many assets"
 					
