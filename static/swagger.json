@@ -260,7 +260,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/BasicErrorBody"
+									"$ref": "#/components/schemas/Error"
 								},
 								"examples": {
 									"InvalidApiKey": {
@@ -513,7 +513,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/GetCatalog403ErrorBody"
+									"$ref": "#/components/schemas/CatalogAccessError"
 								},
 								"examples": {
 									"InvalidApiKey": {
@@ -670,20 +670,20 @@
 												"application/json": {
 													"schema": {
 														"oneOf": [
-															{"$ref": "#/components/schemas/BasicErrorBody"},
-															{"$ref": "#/components/schemas/ResourceExistsErrorBody"},
-															{"$ref": "#/components/schemas/QuotaExceededErrorBody"}
+															{"$ref": "#/components/schemas/Error"},
+															{"$ref": "#/components/schemas/ResourceExistsError"},
+															{"$ref": "#/components/schemas/QuotaExceededError"}
 														]
 													},
 													"examples": {
 														"InvalidApiKey": {
-															"$ref": "#/components/examples/ForbiddenKeyExample"
+															"$ref": "#/components/examples/ErrorExample"
 														},
 														"ResourceExists": {
-															"$ref": "#/components/examples/AssetExistsErrorBodyExample"
+															"$ref": "#/components/examples/AssetExistsErrorExample"
 														},
 														"QuotaExceeded": {
-															"$ref": "#/components/examples/AssetQuotaExceededErrorBodyExample"
+															"$ref": "#/components/examples/AssetQuotaExceededErrorExample"
 														}
 													}
 												}
@@ -3923,21 +3923,21 @@
 		},
 		"examples": {
 			"ForbiddenKeyExample": {
-				"summary": "403 (Invalid Key)",
+				"summary": "Invalid API Key",
 				"value": {
 					"code": 403003,
 					"description": "API Key is invalid"
 				}
 			},
-			"BasicErrorBodyExample": {
-				"summary": "BasicErrorBody",
+			"ErrorExample": {
+				"summary": "Error",
 				"value": {
 					"code": 403003,
 					"description": "API Key is invalid"
 				}
 			},
-			"AssetExistsErrorBodyExample": {
-				"summary": "ResourceExistsErrorBody",
+			"AssetExistsErrorExample": {
+				"summary": "ResourceExistsError",
 				"value": {
 					"errors": {"asset": [ "already exists"]},
 					"code": 1002,
@@ -3945,14 +3945,14 @@
 				}
 			},
 			"ForbiddenAccountExample": {
-				"summary": "403 (Forbidden Account)",
+				"summary": "Forbidden Account",
 				"value": {
 					"code": 4301,
 					"description": "Access forbidden due to account state of resource owner"
 				}
 			},
-			"AssetQuotaExceededErrorBodyExample": {
-				"summary": "QuotaExceededErrorBody",
+			"AssetQuotaExceededErrorExample": {
+				"summary": "QuotaExceededError",
 				"value": {
 					"errors": {"<asset_id>": [ "quota exceeded"]},
 					"code": 1043,
@@ -3961,7 +3961,7 @@
 				}
 			},
 			"ForbiddenExample": {
-				"summary": "403 (Forbidden)",
+				"summary": "Forbidden",
 				"value": {
 					"code": 4300,
 					"description": "Access is forbidden"
@@ -3970,7 +3970,7 @@
 			
 		},
 		"schemas": {
-			"GetCatalog403ErrorBody": {
+			"CatalogAccessError": {
 				"type": "object",
 				"properties": {
 					"code": {
@@ -3984,7 +3984,7 @@
 				}
 			},
 			
-			"ForbiddenKeyErrorBody": {
+			"ForbiddenKeyError": {
 				"type": "object",
 				"properties": {
 					"code": {
@@ -3997,7 +3997,7 @@
 					}
 				}
 			},
-			"ForbiddenAccountErrorBody": {
+			"ForbiddenAccountError": {
 				"type": "object",
 				"properties": {
 					"code": {
@@ -4010,7 +4010,7 @@
 					}
 				}
 			},
-			"ForbiddenErrorBody": {
+			"ForbiddenError": {
 				"type": "object",
 				"properties": {
 					"code": {
@@ -4024,7 +4024,7 @@
 				}
 			},
 			
-			"BasicErrorBody": {
+			"Error": {
 				"type": "object",
 				"properties": {
 					"code": {
@@ -4035,7 +4035,7 @@
 					}
 				}
 			},
-			"ResourceExistsErrorBody": {
+			"ResourceExistsError": {
 				"type": "object",
 				"properties": {
 								"errors": {
@@ -4060,7 +4060,7 @@
 								}
 							}
 			},
-			"QuotaExceededErrorBody": {
+			"QuotaExceededError": {
 				"type": "object",
 				"properties": {
 								"errors": {
